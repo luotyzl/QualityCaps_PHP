@@ -21,8 +21,8 @@ include_once "layout_head.php";
 
 // read products button
 echo "<div class='right-button-margin'>";
-	echo "<a href='read_products.php' class='btn btn-primary pull-right'>";
-		echo "<span class='glyphicon glyphicon-list'></span> Read Products";
+	echo "<a href='read_categories.php' class='btn btn-primary pull-right'>";
+		echo "<span class='glyphicon glyphicon-list'></span> Read catagories";
 	echo "</a>";
 echo "</div>";
 
@@ -33,14 +33,13 @@ if($_POST){
 	include_once '../objects/category.php';
 
 	
-	$catagory = new Catagory($db);
+	$category = new Category($db);
 	
 	// set category property values
-	$catagory->name = $_POST['name'];
-	$catagory->description = $_POST['description'];
+	$category->name = $_POST['name'];
 	
 	// create the catagory
-	if($catagory->create()){
+	if($category->create()){
 
 		// get last inserted id
 		$catagory=$db->lastInsertId();
@@ -48,34 +47,28 @@ if($_POST){
 		
 		echo "<div class=\"alert alert-success alert-dismissable\">";
 			echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";
-			echo "Product was created.";
+			echo "Catagory was created.";
 		echo "</div>";
 	}
 	
-	// if unable to create the product, tell the user
+	// if unable to create the catagory, tell the user
 	else{
 		echo "<div class=\"alert alert-danger alert-dismissable\">";
 			echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";
-			echo "Unable to create product.";
+			echo "Unable to create category.";
 		echo "</div>";
 	}
 }
 ?>
 	 
-<!-- HTML form for creating a product -->
-<form action='create_product.php' method='post' enctype="multipart/form-data">
+<!-- HTML form for creating a catagory -->
+<form action='create_category.php' method='post' enctype="multipart/form-data">
  
 	<table class='table table-hover table-responsive table-bordered'>
 	 
 		<tr>
 			<td>Name</td>
 			<td><input type='text' name='name' class='form-control' required></td>
-		</tr>
-		 
-	 
-		<tr>
-			<td>Description</td>
-			<td><textarea name='description' class='form-control'></textarea></td>
 		</tr>
 		
 		<tr>
