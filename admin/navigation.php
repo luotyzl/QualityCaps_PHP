@@ -80,8 +80,17 @@
 							? "class='active'" : ""; ?> >
 					<a href="<?php echo $home_url; ?>admin/read_users.php">Users</a>
 				</li>
-								
-				<!-- highlight for user related pages -->
+				<!-- highlight for Supplier related pages -->
+				<li <?php 
+						echo $page_title=="Suppliers" 
+							|| $page_title=="Create Supplier" 
+							|| $page_title=="Update Supplier" 
+							|| strip_tags($page_title)=="Suppliers / Edit Supplier" 
+							|| strip_tags($page_title)=="Suppliers / Create Supplier" 
+							? "class='active'" : ""; ?> >
+					<a href="<?php echo $home_url; ?>admin/read_Suppliers.php">Suppliers</a>
+				</li>			
+				<!-- highlight for Catagories related pages -->
 				<li <?php 
 						echo $page_title=="Catagories" 
 							|| $page_title=="Create Catagory" 
