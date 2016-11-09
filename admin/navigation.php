@@ -65,7 +65,6 @@
 				
 				<!-- highlight for order related pages -->
 				<li <?php echo $page_title=="Orders" 
-							|| $page_title=="Order Search Results"
 							|| $page_title=="Order History"
 							|| $page_title=="Order Details" ? "class='active'" : ""; ?> >
 					<a href="<?php echo $home_url; ?>admin/read_orders.php">Orders</a>
@@ -76,7 +75,6 @@
 						echo $page_title=="Users" 
 							|| $page_title=="Create User" 
 							|| $page_title=="Update User" 
-							|| $page_title=="User Search Results" 
 							|| strip_tags($page_title)=="Users / Edit User" 
 							|| strip_tags($page_title)=="Users / Create User" 
 							? "class='active'" : ""; ?> >

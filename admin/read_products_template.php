@@ -1,17 +1,4 @@
 <div class='container row'>
-
-	<!-- search product function -->
-	<div class="col-md-3 pull-left padding-zero">
-		<form role="search" action='search_products.php'>
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Type product name..." name="s" id="srch-term" required <?php echo isset($search_term) ? "value='$search_term'" : ""; ?> />
-				<div class="input-group-btn">
-					<button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-				</div>
-			</div>
-		</form>
-	</div>
-
 	<!-- create product button -->
 	<a href='create_product.php' class="btn btn-primary pull-right margin-bottom-1em">
 		<span class="glyphicon glyphicon-plus"></span> Create Product

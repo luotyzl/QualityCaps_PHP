@@ -1,32 +1,5 @@
 <?php 
-if($page_title!="Order Search Results"){
-	echo "<ul class='nav nav-tabs margin-bottom-1em'>";
-		echo $status==0 ? "<li role='presentation' class='active'>" : "<li role='presentation'>";
-			echo "<a href='{$home_url}admin/read_orders.php'>Pending</a>";
-		echo "</li>";
-		echo $status==1 ? "<li role='presentation' class='active'>" : "<li role='presentation'>";
-			echo "<a href='{$home_url}admin/read_orders.php?status=1'>Completed</a>";
-		echo "</li>";
-	echo "</ul>";
-}
-?>
 
-<div class='container row margin-bottom-1em'>
-	<!-- search product function -->
-	<div class="col-md-3 pull-left padding-zero">
-		<form role="search" action='search_orders.php'>
-			<div class="input-group">
-			
-				<!-- maintain search term -->
-				<input type="text" class="form-control" placeholder="Type transaction ID..." name="s" id="srch-term" required <?php echo isset($search_term) ? "value='$search_term'" : ""; ?> />
-				<div class="input-group-btn">
-					<button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-				</div>
-			</div>
-		</form>
-	</div>
-</div>
-<?php
 // if number of retrieved records were greater than zero
 if($num>0){
 

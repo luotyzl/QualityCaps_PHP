@@ -38,12 +38,6 @@ if($action=='already_logged_in'){
 	echo "</div>";
 }
 
-else if($action=='logged_in_as_admin'){
-	echo "<div class='alert alert-info'>";
-		echo "<strong>You</strong> are logged in as admin.";
-	echo "</div>";
-}
-
 // read all active products in the database
 $stmt=$product->readAll($from_record_num, $records_per_page);
 
