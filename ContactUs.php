@@ -1,34 +1,78 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-
-    <link href="/Content/banner_jd.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="/Scripts/jquery-2.1.1.min.js"></script>
-    <script src="/Scripts/banner_jd02.js" type="text/javascript"></script>
-</head>
-<body>
 <?php
-//Retrieve the requested content page name and construct the file name
-if (isset($_GET['content_page']))
-{
-    $page_name = $_GET['content_page'];
-    $page_content = $page_name.'.php';
-}
-elseif (isset($_POST['content_page']))
-{
-    $page_name = $_POST['content_page'];
-    $page_content = $page_name.'.php';
-}
-else
-{$page_content = 'Index.php';}
+// core configuration
+include_once "config/core.php";
 
-//This must be below the setting of $page_content
-include('MasterPage.php');
+// utilities
+include_once "libs/php/utils.php";
+
+// make it work in PHP 5.4
+include_once "libs/php/pw-hashing/passwordLib.php";
+
+// set page title
+$page_title = "Login";
+
+// include login checker
+include_once "login_checker.php";
+
+// include classes
+include_once "config/database.php";
+include_once "objects/category.php";
+include_once 'objects/user.php';
+include_once 'objects/cart_item.php';
+
+// initialize utility class
+$utils = new Utils();
+
+// get database connection
+$database = new Database();
+$db = $database->getConnection();
+
+// initialize objects
+$category = new Category($db);
+$user = new User($db);
+$cart_item = new CartItem($db);
+
+// default to false
+$access_denied=false;
+
+// include page header HTML
+include_once "layout_head.php";
+
+// to prevent undefined index notice
+$action = isset($_GET['action']) ? $_GET['action'] : "";
+
+// if an email was verified
+if($action=='email_verified'){
+	echo "<div class='alert alert-success'>";
+		echo "<strong>Your email was verified. Thank you!</strong> Please login.";
+	echo "</div>";
+}
 ?>
-<hgroup>
-    <h2>Contact Us</h2>
-</hgroup>
+<?php
+// get 'action' value in url parameter to display corresponding prompt messages
+$action=isset($_GET['action']) ? $_GET['action'] : "";
+
+// tell the user he is not yet logged in
+if($action =='not_yet_logged_in'){
+	echo "<div class=\"alert alert-danger margin-top-40\" role=\"alert\">Please login.</div>";
+}
+
+// tell the user to login
+else if($action=='please_login'){
+	echo "<div class='alert alert-info'>";
+		echo "<strong>Please login to access that page.</strong>";
+	echo "</div>";
+}
+
+// tell the user if access denied
+if($access_denied){
+	echo "<div class=\"alert alert-danger margin-top-40\" role=\"alert\">";
+		echo "Access Denied.<br /><br />";
+		echo "Your username or password maybe incorrect";
+	echo "</div>";
+}
+?>
+
 <div>
     <div class="col-md-5">
         <address>
@@ -47,5 +91,8 @@ include('MasterPage.php');
 
     </div>
 </div>
-</body>
-</html>
+
+<?php
+// footer HTML and JavaScript codes
+include_once "layout_foot.php";
+?>
