@@ -11,11 +11,16 @@
 			<span class="icon-bar"></span>
 			</button>
 			
-			<!-- Change "Your Site" to your site name -->
-			<a class="navbar-brand" href="<?php echo $home_url; ?>admin/read_products.php">Your Site</a>
+			<div id="logo">
+				
+                    <img alt="" src="../images/NewLogo.png" onclick="location.href='../index.php'"/>
+					<!--<a class="navbar-brand" href="<?php echo $home_url; ?>products">Home</a>-->
+			</div>
+			
 		</div>
 		 
 		<div class="navbar-collapse collapse">
+		
 			<ul class="nav navbar-nav">
 			
 				<!-- highlight if $page_title has 'Products' word. -->
@@ -77,6 +82,17 @@
 							? "class='active'" : ""; ?> >
 					<a href="<?php echo $home_url; ?>admin/read_users.php">Users</a>
 				</li>
+								
+				<!-- highlight for user related pages -->
+				<li <?php 
+						echo $page_title=="Catagories" 
+							|| $page_title=="Create Catagory" 
+							|| $page_title=="Update Catagory" 
+							|| strip_tags($page_title)=="Catagories / Edit Catagory" 
+							|| strip_tags($page_title)=="Catagories / Create Catagory" 
+							? "class='active'" : ""; ?> >
+					<a href="<?php echo $home_url; ?>admin/read_catagories.php">Catagories</a>
+				</li>
 			</ul>
 
 			<!-- options in the upper right corner of the page -->
@@ -90,11 +106,11 @@
 					<ul class="dropdown-menu" role="menu">
 						<!-- update currently logged in admin user -->
 						<li><a href="<?php echo $home_url; ?>admin/update_user.php?id=1">Edit Profile</a></li>
-						
-						<!-- log out user -->
-						<li><a href="<?php echo $home_url; ?>logout.php">Logout</a></li>
+		
 					</ul>
 				</li>
+				<!-- log out user -->
+						<li><a href="<?php echo $home_url; ?>logout.php">Logout</a></li>
 			</ul>
 			
 		</div><!--/.nav-collapse -->

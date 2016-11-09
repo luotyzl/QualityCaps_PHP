@@ -127,5 +127,5 @@
  
 		<!-- display page title -->
         <div class="page-header">
-            <h1><?php echo isset($page_title) ? $page_title : "The Code of a Ninja"; ?></h1>
+            <h1><?php echo isset($page_title) ? $page_title : "Quality Caps"; ?></h1>
         </div>
