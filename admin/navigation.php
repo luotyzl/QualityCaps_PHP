@@ -98,7 +98,7 @@
 							|| strip_tags($page_title)=="Catagories / Edit Catagory" 
 							|| strip_tags($page_title)=="Catagories / Create Catagory" 
 							? "class='active'" : ""; ?> >
-					<a href="<?php echo $home_url; ?>admin/read_catagories.php">Catagories</a>
+					<a href="<?php echo $home_url; ?>admin/read_Categories.php">Catagories</a>
 				</li>
 			</ul>
 
