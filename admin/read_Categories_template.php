@@ -45,13 +45,15 @@ if($num>0){
 	
 	// the number of rows retrieved on that page
 	$total_rows=0;
-	
-		
+
+	if($page_url=="read_Categories.php?"){
+		$total_rows = $category->countAll();
+	}
 	// actual paging buttons
 	include_once 'paging.php';
 }
 
-// tell the user no orders found
+// tell the user no categories found
 else{
 	echo "<div class='alert alert-danger'>";
 		echo "<strong>No categories</strong>";
