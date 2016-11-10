@@ -88,7 +88,7 @@
 				<li <?php echo $page_title=="Edit Profile" || $page_title=="Orders" || $page_title=="Order Details" ? "class='active'" : ""; ?>>
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-						&nbsp;&nbsp;<?php echo $_SESSION['firstname']; ?>
+						&nbsp;&nbsp;<?php echo $_SESSION['username']; ?>
 						&nbsp;&nbsp;<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu">

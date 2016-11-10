@@ -52,7 +52,7 @@ echo "<div class='col-md-12'>";
 		else{
 
 			// set values to object properties
-			$user->firstname=$_POST['firstname'];
+			$user->username=$_POST['username'];
 			$user->contact_number=$_POST['contact_number'];
 			$user->address=$_POST['address'];
 			$user->password=$_POST['password'];
@@ -89,7 +89,7 @@ echo "<div class='col-md-12'>";
 
 			<tr>
 				<td class='width-30-percent'>Username</td>
-				<td><input type='text' name='firstname' class='form-control' required value="<?php echo isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname'], ENT_QUOTES) : "";  ?>" /></td>
+				<td><input type='text' name='username' class='form-control' required value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username'], ENT_QUOTES) : "";  ?>" /></td>
 			</tr>
 
 			<tr>

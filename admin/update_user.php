@@ -34,7 +34,7 @@ $user_id=isset($_GET['id']) ? $_GET['id'] : die('Missing user ID.');
 if($_POST){
 				
 	// set posted values to user properties
-	$user->firstname=$_POST['firstname'];
+	$user->username=$_POST['username'];
 	$user->email=$_POST['email'];
 	$user->contact_number=$_POST['contact_number'];
 	$user->address=$_POST['address'];
@@ -50,8 +50,8 @@ if($_POST){
 		$user->id=$_SESSION['user_id'];
 		$user->readOne();
 		
-		// change saved firstname
-		$_SESSION['firstname']=$user->firstname;
+		// change saved username
+		$_SESSION['username']=$user->username;
 		
 		// tell the user it was updated
 		echo "<div class='alert alert-success'>User was edited</div>";
@@ -76,8 +76,8 @@ $user->readOne();
     <table class='table table-hover table-responsive table-bordered'>
  
         <tr>
-            <td class='width-30-percent'>Firstname</td>
-            <td><input type='text' name='firstname' value="<?php echo $user->firstname; ?>" class='form-control' required></td>
+            <td class='width-30-percent'>Username</td>
+            <td><input type='text' name='username' value="<?php echo $user->username; ?>" class='form-control' required></td>
         </tr>
  		
 		<tr>

@@ -13,7 +13,7 @@ if($num>0){
 
 		// table headers
         echo "<tr>";
-			echo "<th>Firstname</th>";
+			echo "<th>Username</th>";
             echo "<th>Email</th>";
             echo "<th>Contact Number</th>";
             echo "<th>Access Level</th>";
@@ -27,7 +27,7 @@ if($num>0){
  
 			// display user details
             echo "<tr>";
-				echo "<td>{$firstname}</td>";
+				echo "<td>{$username}</td>";
                 echo "<td>{$email}</td>";
 				echo "<td>{$contact_number}</td>";
 				echo "<td>{$access_level}</td>";
