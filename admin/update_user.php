@@ -35,7 +35,6 @@ if($_POST){
 				
 	// set posted values to user properties
 	$user->firstname=$_POST['firstname'];
-	$user->lastname=$_POST['lastname'];
 	$user->email=$_POST['email'];
 	$user->contact_number=$_POST['contact_number'];
 	$user->address=$_POST['address'];
@@ -80,12 +79,7 @@ $user->readOne();
             <td class='width-30-percent'>Firstname</td>
             <td><input type='text' name='firstname' value="<?php echo $user->firstname; ?>" class='form-control' required></td>
         </tr>
- 
-        <tr>
-            <td>Lastname</td>
-            <td><input type='text' name='lastname' value="<?php echo $user->lastname; ?>" class='form-control' required></td>
-        </tr>
-		
+ 		
 		<tr>
             <td>Contact Number</td>
             <td><input type='text' name='contact_number' value="<?php echo $user->contact_number; ?>" class='form-control' required></td>

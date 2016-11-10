@@ -9,7 +9,6 @@ class User{
     // object properties
 	public $id;
 	public $firstname;
-	public $lastname;
 	public $email;
 	public $contact_number;
 	public $address;
@@ -156,7 +155,7 @@ class User{
 	function emailExists(){
 	 
 		// query to check if email exists
-		$query = "SELECT id, firstname, lastname, access_level, password, status  
+		$query = "SELECT id, firstname, access_level, password, status  
 				FROM " . $this->table_name . "
 				WHERE email = ? 
 				LIMIT 0,1";
@@ -185,7 +184,6 @@ class User{
 			// assign values to object properties
 			$this->id = $row['id'];
 			$this->firstname = $row['firstname'];
-			$this->lastname = $row['lastname'];
 			$this->access_level = $row['access_level'];
 			$this->password = $row['password'];
 			$this->status = $row['status'];
@@ -208,8 +206,7 @@ class User{
         $query = "INSERT INTO
                     " . $this->table_name . "
                 SET
-					firstname = :firstname, 
-					lastname = :lastname, 
+					firstname = :firstname,  
 					email = :email, 
 					contact_number = :contact_number, 
 					address = :address, 
@@ -224,7 +221,6 @@ class User{
  
 		// sanitize
 		$this->firstname=htmlspecialchars(strip_tags($this->firstname));
-		$this->lastname=htmlspecialchars(strip_tags($this->lastname));
 		$this->email=htmlspecialchars(strip_tags($this->email));
 		$this->contact_number=htmlspecialchars(strip_tags($this->contact_number));
 		$this->address=htmlspecialchars(strip_tags($this->address));
@@ -235,7 +231,6 @@ class User{
 		
 		// bind the values
         $stmt->bindParam(':firstname', $this->firstname);
-        $stmt->bindParam(':lastname', $this->lastname);
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':contact_number', $this->contact_number);
 		$stmt->bindParam(':address', $this->address);
@@ -289,7 +284,7 @@ class User{
 	function search($search_term, $from_record_num, $records_per_page){
 
 		// query to search user
-		$query = "SELECT id, firstname, lastname, email, contact_number, access_level,status, created
+		$query = "SELECT id, firstname, email, contact_number, access_level,status, created
 				FROM " . $this->table_name . " 
 				WHERE email LIKE ? 
 				ORDER BY email ASC 
@@ -325,7 +320,6 @@ class User{
 						" . $this->table_name . "
 					SET
 						firstname = :firstname,
-						lastname = :lastname,
 						email = :email,
 						contact_number = :contact_number,
 						address = :address,
@@ -339,7 +333,6 @@ class User{
 
 			// sanitize
 			$this->firstname=htmlspecialchars(strip_tags($this->firstname));
-			$this->lastname=htmlspecialchars(strip_tags($this->lastname));
 			$this->email=htmlspecialchars(strip_tags($this->email));
 			$this->contact_number=htmlspecialchars(strip_tags($this->contact_number));
 			$this->address=htmlspecialchars(strip_tags($this->address));
@@ -348,7 +341,6 @@ class User{
 
 			// bind the values from the form
 			$stmt->bindParam(':firstname', $this->firstname);
-			$stmt->bindParam(':lastname', $this->lastname);
 			$stmt->bindParam(':email', $this->email);
 			$stmt->bindParam(':contact_number', $this->contact_number);
 			$stmt->bindParam(':address', $this->address);
@@ -362,7 +354,6 @@ class User{
 						" . $this->table_name . "
 					SET
 						firstname = :firstname,
-						lastname = :lastname,
 						email = :email,
 						contact_number = :contact_number,
 						address = :address,
@@ -377,7 +368,6 @@ class User{
 
 			// sanitize
 			$this->firstname=htmlspecialchars(strip_tags($this->firstname));
-			$this->lastname=htmlspecialchars(strip_tags($this->lastname));
 			$this->email=htmlspecialchars(strip_tags($this->email));
 			$this->contact_number=htmlspecialchars(strip_tags($this->contact_number));
 			$this->address=htmlspecialchars(strip_tags($this->address));
@@ -387,7 +377,6 @@ class User{
 
 			// bind the values from the form
 			$stmt->bindParam(':firstname', $this->firstname);
-			$stmt->bindParam(':lastname', $this->lastname);
 			$stmt->bindParam(':email', $this->email);
 			$stmt->bindParam(':contact_number', $this->contact_number);
 			$stmt->bindParam(':address', $this->address);
@@ -415,7 +404,7 @@ class User{
 	function readOne(){
 	 
 		// query to read single record
-		$query = "SELECT firstname, lastname, email, contact_number, address, access_level,status, password 
+		$query = "SELECT firstname, email, contact_number, address, access_level,status, password 
 				FROM " . $this->table_name . "
 				WHERE id = ? 
 				LIMIT 0,1";
@@ -437,7 +426,6 @@ class User{
 	 
 		// assign the values to object properties, for easy access
 		$this->firstname = $row['firstname'];
-		$this->lastname = $row['lastname'];
 		$this->email = $row['email'];
 		$this->contact_number = $row['contact_number'];
 		$this->address = $row['address'];
@@ -451,7 +439,7 @@ class User{
 	function readAll_NoPaging(){
 	 
 		// query to read all users
-		$query = "SELECT id, firstname, lastname, email, contact_number, access_level,status, created
+		$query = "SELECT id, firstname,  email, contact_number, access_level,status, created
 				FROM " . $this->table_name . "
 				ORDER BY created DESC";
 	 
@@ -472,7 +460,6 @@ class User{
 		$query = "SELECT
 					id,
 					firstname,
-					lastname,
 					email,
 					contact_number,
 					access_level,

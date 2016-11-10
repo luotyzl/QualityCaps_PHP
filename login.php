@@ -61,8 +61,8 @@ if($_POST){
 		$_SESSION['logged_in'] = true;
 		$_SESSION['user_id'] = $user->id;
 		$_SESSION['access_level'] = $user->access_level;
+		$_SESSION['user_status'] = $user->status;
 		$_SESSION['firstname'] = htmlspecialchars($user->firstname, ENT_QUOTES, 'UTF-8') ;
-		$_SESSION['lastname'] = $user->lastname;
 
 		// // if access level is 'Admin', redirect to admin section
 		// if($user->access_level=='Admin'){
@@ -90,7 +90,7 @@ $action = isset($_GET['action']) ? $_GET['action'] : "";
 // if an email was verified
 if($action=='email_verified'){
 	echo "<div class='alert alert-success'>";
-		echo "<strong>Your email was verified. Thank you!</strong> Please login.";
+		echo "<strong>Your email was sent. Thank you!</strong> Please login.";
 	echo "</div>";
 }
 ?>
@@ -113,10 +113,18 @@ else if($action=='please_login'){
 
 // tell the user if access denied
 if($access_denied){
+	if($user->status==1){
 	echo "<div class=\"alert alert-danger margin-top-40\" role=\"alert\">";
 		echo "Access Denied.<br /><br />";
 		echo "Your username or password maybe incorrect";
 	echo "</div>";
+	}
+	else{
+	echo "<div class=\"alert alert-danger margin-top-40\" role=\"alert\">";
+		echo "Access Denied.<br /><br />";
+		echo "Your account is disable";
+	echo "</div>";
+	}
 }
 ?>
 

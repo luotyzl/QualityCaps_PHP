@@ -53,7 +53,6 @@ echo "<div class='col-md-12'>";
 
 			// set values to object properties
 			$user->firstname=$_POST['firstname'];
-			$user->lastname=$_POST['lastname'];
 			$user->contact_number=$_POST['contact_number'];
 			$user->address=$_POST['address'];
 			$user->password=$_POST['password'];
@@ -71,7 +70,8 @@ echo "<div class='col-md-12'>";
 					echo "Successfully registered.";
 				echo "</div>";
 				
-			}else{
+			}
+			else{
 				echo "<div class='alert alert-danger'>";
 					echo "Unable to register. Please try again.";
 				echo "</div>";
@@ -88,13 +88,8 @@ echo "<div class='col-md-12'>";
 		<table class='table table-hover table-responsive table-bordered'>
 
 			<tr>
-				<td class='width-30-percent'>Firstname</td>
+				<td class='width-30-percent'>Username</td>
 				<td><input type='text' name='firstname' class='form-control' required value="<?php echo isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname'], ENT_QUOTES) : "";  ?>" /></td>
-			</tr>
-
-			<tr>
-				<td>Lastname</td>
-				<td><input type='text' name='lastname' class='form-control' required value="<?php echo isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname'], ENT_QUOTES) : "";  ?>" /></td>
 			</tr>
 
 			<tr>
