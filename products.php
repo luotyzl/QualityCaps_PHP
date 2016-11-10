@@ -68,11 +68,11 @@ echo "<div class='col-md-12'>";
 	}
 
 	// if product is inactive
-	else if($action=='product_inactive'){
-		echo "<div class='alert alert-info'>";
-			echo "<strong>The product you are trying to view is inactive.</strong>";
-		echo "</div>";
-	}
+	// else if($action=='product_inactive'){
+	// 	echo "<div class='alert alert-info'>";
+	// 		echo "<strong>The product you are trying to view is inactive.</strong>";
+	// 	echo "</div>";
+	// }
 
 echo "</div>";
 

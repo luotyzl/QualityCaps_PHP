@@ -93,10 +93,6 @@ echo "<div class='col-md-12'>";
 			<td class='width-70-percent'><?php echo "&#36;" . number_format($product->price, 2, '.', ','); ?></td>
 		</tr>
 
-		<tr>
-			<td>Description</td>
-			<td><?php echo $product->description; ?></td>
-		</tr>
 
 		<tr>
 			<td>Category</td>

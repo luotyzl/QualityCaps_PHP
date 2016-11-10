@@ -10,11 +10,8 @@ class Product{
 	public $id;
 	public $name;
 	public $price;
-	public $description;
 	public $category_id;
-	public $active_until;
 	public $category_name;
-	public $timestamp;
 
 	// constructor
 	public function __construct($db){
@@ -24,7 +21,7 @@ class Product{
 	// read products with field sorting
 	public function readAll_WithSorting($from_record_num, $records_per_page, $field, $order){
 
-		$query = "SELECT p.id, p.name, p.description, p.price, p.category_id, c.name as category_name, p.created, p.active_until
+		$query = "SELECT p.id, p.name, p.price, p.category_id, c.name as category_name,
 					FROM products p
 						LEFT JOIN categories c
 							ON p.category_id=c.id
@@ -46,33 +43,25 @@ class Product{
 	// create product record
 	function create(){
 
-		// to get time-stamp for 'created' field
-		$this->getTimestamp();
-
 		// insert product query
 		$query = "INSERT INTO
 					" . $this->table_name . "
 				SET
-					name = ?, price = ?, description = ?, category_id = ?, created = ?, active_until = ?";
+					name = ?, price = ?, category_id = ?";
 
 		// prepare query statement
 		$stmt = $this->conn->prepare($query);
 
 		// sanitize
 		$this->name=htmlspecialchars(strip_tags($this->name));
-		$this->price=htmlspecialchars(strip_tags($this->price));
-		$this->description=htmlspecialchars(strip_tags($this->description));
+		$this->price=htmlspecialchars(strip_tags($this->price));		
 		$this->category_id=htmlspecialchars(strip_tags($this->category_id));
-		$this->timestamp=htmlspecialchars(strip_tags($this->timestamp));
-		$this->active_until=htmlspecialchars(strip_tags($this->active_until));
 
 		// bind values
 		$stmt->bindParam(1, $this->name);
 		$stmt->bindParam(2, $this->price);
-		$stmt->bindParam(3, $this->description);
-		$stmt->bindParam(4, $this->category_id);
-		$stmt->bindParam(5, $this->timestamp);
-		$stmt->bindParam(6, $this->active_until);
+		$stmt->bindParam(3, $this->category_id);
+
 
 		// execute query
 		if($stmt->execute()){
@@ -87,17 +76,16 @@ class Product{
 
 		// select all products query
 		$query = "SELECT
-					c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.active_until
+					c.name as category_name, p.id, p.name,  p.price, p.category_id
 				FROM
 					" . $this->table_name . " p
 					LEFT JOIN
 						categories c
 					ON
 						p.category_id = c.id
-				WHERE
-					p.active_until >= NOW()
+				
 				ORDER BY
-					p.created DESC
+					p.name DESC
 				LIMIT
 					?, ?";
 
@@ -120,15 +108,14 @@ class Product{
 
 		// sql query to read all inactive products
 		$query = "SELECT
-					c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.active_until
+					c.name as category_name, p.id, p.name, p.price, p.category_id
 				FROM
 					" . $this->table_name . " p
 					LEFT JOIN
 						categories c
 					ON
 						p.category_id = c.id
-				WHERE
-					p.active_until < NOW()
+				
 				ORDER BY
 					p.name ASC
 				LIMIT
@@ -153,7 +140,7 @@ class Product{
 
 		// query to read all products by category
 		$query = "SELECT
-					c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.active_until
+					c.name as category_name, p.id, p.name, p.price, p.category_id
 				FROM
 					" . $this->table_name . " p
 					LEFT JOIN
@@ -161,8 +148,7 @@ class Product{
 					ON
 						p.category_id = c.id
 				WHERE
-					p.active_until > NOW()
-					AND category_id = ?
+					 category_id = ?
 				ORDER BY
 					p.name ASC
 				LIMIT
@@ -191,7 +177,7 @@ class Product{
 
 		// select query
 		$query = "SELECT
-					c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.active_until
+					c.name as category_name, p.id, p.name, p.price, p.category_id
 				FROM
 					" . $this->table_name . " p
 					LEFT JOIN
@@ -246,7 +232,7 @@ class Product{
 	public function countAll(){
 
 		// query to count all product records
-		$query = "SELECT count(*) FROM " . $this->table_name . " WHERE active_until > NOW()";
+		$query = "SELECT count(*) FROM " . $this->table_name ;
 
 		// prepare query statement
 		$stmt = $this->conn->prepare( $query );
@@ -265,7 +251,7 @@ class Product{
 	public function countAll_ByCategory(){
 
 		// 'select count' query to count products under a category
-		$query = "SELECT count(*) FROM " . $this->table_name . " WHERE category_id=? AND active_until > NOW()";
+		$query = "SELECT count(*) FROM " . $this->table_name . " WHERE category_id=? ";
 
 		// prepare query statement
 		$stmt = $this->conn->prepare( $query );
@@ -291,7 +277,7 @@ class Product{
 	public function countAll_Inactive(){
 
 		// count all inactive products
-		$query = "SELECT count(*) FROM " . $this->table_name . " WHERE active_until < NOW()";
+		$query = "SELECT count(*) FROM " . $this->table_name;
 
 		// prepare query statement
 		$stmt = $this->conn->prepare( $query );
@@ -341,7 +327,7 @@ class Product{
 				FROM
 					" . $this->table_name . "
 				WHERE
-					id=? AND active_until > NOW()
+					id=?
 				LIMIT
 					0,1";
 
@@ -372,7 +358,7 @@ class Product{
 
 		// query to select single record
 		$query = "SELECT
-					c.name as category_name, p.name, p.price, p.description, p.category_id, p.active_until
+					c.name as category_name, p.name, p.price, p.category_id
 				FROM
 					" . $this->table_name . " p
 					LEFT JOIN
@@ -401,9 +387,7 @@ class Product{
 		// assign retrieved row value to object properties
 		$this->name = $row['name'];
 		$this->price = $row['price'];
-		$this->description = $row['description'];
 		$this->category_id = $row['category_id'];
-		$this->active_until = $row['active_until'];
 		$this->category_name = $row['category_name'];
 	}
 
@@ -415,10 +399,8 @@ class Product{
 					" . $this->table_name . "
 				SET
 					name = :name,
-					price = :price,
-					description = :description,
-					category_id  = :category_id,
-					active_until  = :active_until
+					price = :price,					
+					category_id  = :category_id,					
 				WHERE
 					id = :id";
 
@@ -428,17 +410,13 @@ class Product{
 		// sanitize
 		$this->name=htmlspecialchars(strip_tags($this->name));
 		$this->price=htmlspecialchars(strip_tags($this->price));
-		$this->description=htmlspecialchars(strip_tags($this->description));
 		$this->category_id=htmlspecialchars(strip_tags($this->category_id));
-		$this->active_until=htmlspecialchars(strip_tags($this->active_until));
 		$this->id=htmlspecialchars(strip_tags($this->id));
 
 		// bind variable values
 		$stmt->bindParam(':name', $this->name);
 		$stmt->bindParam(':price', $this->price);
-		$stmt->bindParam(':description', $this->description);
 		$stmt->bindParam(':category_id', $this->category_id);
-		$stmt->bindParam(':active_until', $this->active_until);
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query

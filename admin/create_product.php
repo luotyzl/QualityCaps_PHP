@@ -41,9 +41,7 @@ if($_POST){
 	// set product property values
 	$product->name = $_POST['name'];
 	$product->price = $_POST['price'];
-	$product->description = $_POST['description'];
 	$product->category_id = $_POST['category_id'];
-	$product->active_until = $_POST['active_until'];
 	
 	// create the product
 	if($product->create()){
@@ -55,9 +53,6 @@ if($_POST){
 		$productImage->product_id = $product_id;
 		$productImage->upload();
 		
-		// save the pdf files
-		$productPdf->product_id = $product_id;
-		$productPdf->upload();
 		
 		echo "<div class=\"alert alert-success alert-dismissable\">";
 			echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";
@@ -89,12 +84,7 @@ if($_POST){
 			<td>Price</td>
 			<td><input type='text' name='price' class='form-control' required></td>
 		</tr>
-		 
-		<tr>
-			<td>Description</td>
-			<td><textarea name='description' class='form-control'></textarea></td>
-		</tr>
-		 
+		 		 
 		<tr>
 			<td>Category</td>
 			<td>
@@ -117,13 +107,6 @@ if($_POST){
 			</td>
 		</tr>
 		 
-		<tr>
-			<td>Active Until:</td>
-			<td>
-				<!-- uses jQuery UI date picker -->
-				<input type="text" name='active_until' id="active-until" class='form-control' placeholder="Click to pick date" />
-			</td>
-		</tr>
 		
 		<tr>
 			<td>Image(s):</td>
@@ -133,13 +116,6 @@ if($_POST){
 			</td>
 		</tr>
 		
-		<tr>
-			<td>PDF(s):</td>
-			<td>
-				<!-- browse multiple PDF files -->
-				<input type="file" name="pdf_file[]" class='form-control' multiple>
-			</td>
-		</tr>
 		
 		<tr>
 			<td></td>

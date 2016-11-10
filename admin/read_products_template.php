@@ -43,26 +43,13 @@ if($num>0){
 					echo $field=="price" ? $field_sort_html : "";
 				echo "</a>";
 			echo "</th>";
-            echo "<th style='width:25%;'>";
-				echo "<a href='read_products_sorted_by_fields.php?field=description&order={$reverse_order}'>";
-					echo "Description ";
-					echo $field=="description" ? $field_sort_html : "";
-				echo "</a>";
-			echo "</th>";
 			echo "<th>";
 				echo "<a href='read_products_sorted_by_fields.php?field=category_name&order={$reverse_order}'>";
 					echo "Category ";
 					echo $field=="category_name" ? $field_sort_html : "";
 				echo "</a>";
 			echo "</th>";
-			echo "<th style='width:8%;'>";
-				echo "<a href='read_products_sorted_by_fields.php?field=active_until&order={$reverse_order}'>";
-					echo "Days Left ";
-					echo $field=="active_until" ? $field_sort_html : "";
-				echo "</a>";
-			echo "</th>";
 			echo "<th>Image(s)</th>";
-			echo "<th>PDF(s)</th>";
 			echo "<th class='width-13-em'>Actions</th>";
 		echo "</tr>";
 		
@@ -76,30 +63,8 @@ if($num>0){
 				// product details
 				echo "<td>{$name}</td>";
 				echo "<td>&#36;" . number_format($price, 2) . "</td>";
-				echo "<td>{$description}</td>";
 				echo "<td>{$category_name}</td>";
-				
-				// until when a product is active
-				echo "<td>";
-					if($active_until!="0000-00-00 00:00:00"){
-						$date1 = new DateTime($active_until);
-						$date2 = new DateTime(date('Y-m-d'));
-						$interval = $date1->diff($date2);
-						
-						if($date1<$date2){
-							echo "Inactive " . $interval->days . " days ago";
-						}
-						
-						else{
-							echo $interval->days . " days ";
-						}
-						
-					}else{
-						echo "Not set.";
-					}
-					
-				echo "</td>";
-					
+			
 				echo "<td>";
 					// related image files to a product
 					$product_image->product_id=$id;
@@ -117,25 +82,7 @@ if($num>0){
 						echo "No images.";
 					}
 				echo "</td>";
-				
-				echo "<td>";
-					// related PDF files to a product
-					$product_pdf->product_id=$id;
-					$stmt_product_pdf = $product_pdf->readAll();
-					$num_product_pdf = $stmt_product_pdf->rowCount();
-					
-					if($num_product_pdf>0){
-						$x=1;
-						while ($row = $stmt_product_pdf->fetch(PDO::FETCH_ASSOC)){
-							$product_pdf_name = $row['name'];
-							echo "<a href='../uploads/pdfs/{$product_pdf_name}' target='_blank'>PDF {$x}</a><br />";
-							$x++;
-						}
-					}else{
-						echo "No PDFs.";
-					}
-				echo "</td>";
-				
+
 				echo "<td>";
 				
 					// edit product button
