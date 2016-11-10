@@ -12,8 +12,8 @@ $product_id = isset($_GET['id']) ? $_GET['id'] : die('Missing product ID.');
 include_once '../config/database.php';
 include_once '../objects/product.php';
 include_once '../objects/product_image.php';
-include_once '../objects/product_pdf.php';
 include_once "../objects/category.php";
+include_once "../objects/supplier.php";
 
 // get database connection
 $database = new Database();
@@ -22,8 +22,8 @@ $db = $database->getConnection();
 // initialize objects
 $product = new Product($db);
 $product_image = new ProductImage($db);
-$product_pdf = new ProductPdf($db);
 $category = new Category($db);
+$supplier = new Supplier($db);
 
 // set page title
 $page_title = "Update Product";
@@ -50,9 +50,9 @@ if($_POST){
 	// set product property values
 	$product->name = $_POST['name'];
 	$product->price = $_POST['price'];
-	$product->description = $_POST['description'];
 	$product->category_id = $_POST['category_id'];
-	$product->active_until = $_POST['active_until'];
+	$product->supplier_id = $_POST['supplier_id'];
+
 	
 	// update the product
 	if($product->update()){
@@ -61,9 +61,6 @@ if($_POST){
 		$product_image->product_id = $product_id;
 		$product_image->upload();
 		
-		// save the pdf files
-		$product_pdf->product_id = $product_id;
-		$product_pdf->upload();
 		
 		echo "<div class=\"alert alert-success alert-dismissable\">";
 			echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";
@@ -97,11 +94,6 @@ if($_POST){
 		</tr>
 		 
 		<tr>
-			<td>Description</td>
-			<td><textarea name='description' class='form-control js-textarea'><?php echo htmlentities($product->description); ?></textarea></td>
-		</tr>
-		 
-		<tr>
 			<td>Category</td>
 			<td>
 				<?php
@@ -131,12 +123,34 @@ if($_POST){
 				?>
 			</td>
 		</tr>
-		
 		<tr>
-			<td>Active Until:</td>
+			<td>Supplier</td>
 			<td>
-				<!-- we are using jQuery UI as data picker -->
-				<input type="text" name='active_until' id="active-until" value='<?php echo htmlentities(substr($product->active_until, 0, 10)); ?>' class='form-control' placeholder="Click to pick date" />
+				<?php
+				// read the product suppliers from the database
+				include_once '../objects/supplier.php';
+
+				$supplier = new Supplier($db);
+				$stmt = $supplier->readAll_WithoutPaging();
+				
+				// put them in a select drop-down
+				echo "<select class='form-control' name='supplier_id'>";
+				
+					echo "<option>Please select...</option>";
+					while ($row_supplier = $stmt->fetch(PDO::FETCH_ASSOC)){
+						extract($row_supplier);
+						
+						// current supplier of the product must be selected
+						if($product->supplier_id==$id){
+							echo "<option value='$id' selected>";
+						}else{
+							echo "<option value='$id'>";
+						}
+						
+						echo "$name</option>";
+					}
+				echo "</select>";
+				?>
 			</td>
 		</tr>
 		
@@ -187,49 +201,7 @@ if($_POST){
 				<input type="file" name="files[]" id="html-btn" class='form-control' multiple>
 			</td>
 		</tr>
-		<tr>
-			<td>PDF(s):</td>
-			<td>
-				<?php 
-				// set product id
-				$product_pdf->product_id=$product_id;
 				
-				// read all pdf records under the product id
-				$stmt_product_pdf = $product_pdf->readAll();
-				
-				// count number of pdf records under a product id
-				$num_product_pdf = $stmt_product_pdf->rowCount();
-
-				// if retrieved pdf records was greater than 0
-				if($num_product_pdf>0){
-					
-					// loop through the retrieved product pdf records
-					while ($row = $stmt_product_pdf->fetch(PDO::FETCH_ASSOC)){
-						
-						// pdf record id and name
-						$product_pdf_id = $row['id'];
-						$product_pdf_name = $row['name'];
-						
-						// display pdf list
-						echo "<div class='pdf-item'>";
-							echo "<a href='{$home_url}uploads/pdfs/{$product_pdf_name}' target='_blank'>";
-								echo "{$product_pdf_name}";
-							echo "</a>";
-							
-							echo "<span class='delete-pdf delete-object' delete-id='{$product_pdf_id}' delete-file='delete_pdf.php' >";
-								echo "<img src='{$home_url}images/delete.png' title='Delete PDF?' />";
-							echo "</span>";
-						echo "</div>";
-					}
-				}
-				?>
-				
-				<!-- field to browse multiple pdf records -->
-				<input type="file" name="pdf_file[]" class='form-control' multiple>
-				
-			</td>
-		</tr>
-		
 		<tr>
 			<td></td>
 			<td>

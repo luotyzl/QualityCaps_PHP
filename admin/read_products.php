@@ -9,8 +9,9 @@ include_once "login_checker.php";
 include_once "../config/database.php";
 include_once "../objects/product.php";
 include_once "../objects/category.php";
+include_once "../objects/supplier.php";
 include_once "../objects/product_image.php";
-include_once "../objects/product_pdf.php";
+
 
 // get database connection
 $database = new Database();
@@ -19,11 +20,12 @@ $db = $database->getConnection();
 // initialize objects
 $product = new Product($db);
 $category = new Category($db);
+$supplier = new Supplier($db);
 $product_image = new ProductImage($db);
-$product_pdf = new ProductPdf($db);
+
 
 // set page title
-$page_title="Active Products";
+$page_title="Products";
 
 // include page header HTML
 include 'layout_head.php';

@@ -49,6 +49,12 @@ if($num>0){
 					echo $field=="category_name" ? $field_sort_html : "";
 				echo "</a>";
 			echo "</th>";
+			echo "<th>";
+				echo "<a href='read_products_sorted_by_fields.php?field=supplier_name&order={$reverse_order}'>";
+					echo "Supplier ";
+					echo $field=="supplier_name" ? $field_sort_html : "";
+				echo "</a>";
+			echo "</th>";
 			echo "<th>Image(s)</th>";
 			echo "<th class='width-13-em'>Actions</th>";
 		echo "</tr>";
@@ -64,7 +70,7 @@ if($num>0){
 				echo "<td>{$name}</td>";
 				echo "<td>&#36;" . number_format($price, 2) . "</td>";
 				echo "<td>{$category_name}</td>";
-			
+				echo "<td>{$supplier_name}</td>";
 				echo "<td>";
 					// related image files to a product
 					$product_image->product_id=$id;

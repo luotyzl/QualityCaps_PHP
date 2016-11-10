@@ -421,7 +421,7 @@ class Product{
 					name = :name,
 					price = :price,					
 					category_id  = :category_id,
-					supplier_id  = :supplier_id,
+					supplier_id  = :supplier_id
 				WHERE
 					id = :id";
 

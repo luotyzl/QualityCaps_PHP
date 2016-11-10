@@ -6,7 +6,6 @@ if($_POST){
 	include_once '../config/database.php';
 	include_once '../objects/product.php';
 	include_once '../objects/product_image.php';
-	include_once '../objects/product_pdf.php';
 
 	// get database connection
 	$database = new Database();
@@ -15,7 +14,6 @@ if($_POST){
 	// initialize objects
 	$product = new Product($db);
 	$productImage = new ProductImage($db);
-	$productPdf = new ProductPdf($db);
 	
 	// set product id to be deleted
 	$product_id=$_POST['object_id'];

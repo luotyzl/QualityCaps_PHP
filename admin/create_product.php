@@ -33,11 +33,9 @@ if($_POST){
 	// instantiate product object
 	include_once '../objects/product.php';
 	include_once '../objects/product_image.php';
-	include_once '../objects/product_pdf.php';
 	
 	$product = new Product($db);
 	$productImage = new ProductImage($db);
-	$productPdf = new ProductPdf($db);
 
 	// set product property values
 	$product->name = $_POST['name'];
