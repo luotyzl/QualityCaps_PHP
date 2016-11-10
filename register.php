@@ -39,16 +39,12 @@ echo "<div class='col-md-12'>";
 	// if form was posted
 	if($_POST){
 
-		// set user email to detect if it already exists
-		$user->email=$_POST['email'];
-
-		// check if email already exists
-		if($user->emailExists()){
+		$user->username=$_POST['username'];
+		if($user->usernameExists()){
 			echo "<div class='alert alert-danger'>";
-				echo "The email you specified is already registered. Please try to <a href='{$home_url}login'>login.</a>";
+				echo "The username you specified is already registered. Please try to <a href='{$home_url}login'>login.</a>";
 			echo "</div>";
 		}
-
 		else{
 
 			// set values to object properties

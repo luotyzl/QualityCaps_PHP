@@ -39,13 +39,13 @@ $access_denied=false;
 if($_POST){
 
 	// check if email and password are in the database
-	$user->email=$_POST['email'];
+	$user->username=$_POST['username'];
 
 	// check if email exists, also get user details using this emailExists() method
-	$email_exists = $user->emailExists();
+	$username_exists = $user->usernameExists();
 
 	// validate login
-	if($email_exists && password_verify($_POST['password'], $user->password) && $user->status==1){
+	if($username_exists && password_verify($_POST['password'], $user->password) && $user->status==1){
 
 		// check if valid temporary user id exists
 		if(isset($_SESSION['user_id'])){
@@ -134,7 +134,7 @@ if($access_denied){
 			<div class="tab-pane active" id="login">
 				<img class="profile-img" src="images/login-icon.png">
 				<form class="form-signin" action="login" method="post">
-					<input type="text" name="email" class="form-control" placeholder="Email" required autofocus />
+					<input type="text" name="username" class="form-control" placeholder="Username" required autofocus />
 					<input type="password" name="password" class="form-control" placeholder="Password" required />
 					<input type="submit" class="btn btn-lg btn-primary btn-block" value="Log In" />
 					<div class='text-align-center margin-top-1em'>

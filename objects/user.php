@@ -151,23 +151,23 @@ class User{
 		}
 	}
 	
-	// check if given email exist in the database
-	function emailExists(){
+		// check if given email exist in the database
+	function usernameExists(){
 	 
-		// query to check if email exists
-		$query = "SELECT id, username, access_level, password, status  
+		// query to check if username exists
+		$query = "SELECT id, email, access_level, password, status  
 				FROM " . $this->table_name . "
-				WHERE email = ? 
+				WHERE username = ? 
 				LIMIT 0,1";
 	 
 		// prepare the query
 		$stmt = $this->conn->prepare( $query );
 		
 		// sanitize
-		$this->email=htmlspecialchars(strip_tags($this->email));
+		$this->username=htmlspecialchars(strip_tags($this->username));
 		
 		// bind given email value
-		$stmt->bindParam(1, $this->email);
+		$stmt->bindParam(1, $this->username);
 		
 		// execute the query
 		$stmt->execute();
@@ -175,7 +175,7 @@ class User{
 		// get number of rows
 		$num = $stmt->rowCount();
 		
-		// if email exists, assign values to object properties for easy access and use for php sessions
+		// if username exists, assign values to object properties for easy access and use for php sessions
 		if($num>0){
 			
 			// get record details / values
@@ -183,19 +183,18 @@ class User{
 			
 			// assign values to object properties
 			$this->id = $row['id'];
-			$this->username = $row['username'];
+			$this->email = $row['email'];
 			$this->access_level = $row['access_level'];
 			$this->password = $row['password'];
 			$this->status = $row['status'];
 			
-			// return true because email exists in the database
+			// return true because username exists in the database
 			return true;
 		}
 		
-		// return false if email does not exist in the database
+		// return false if username does not exist in the database
 		return false;
 	}
-	
     // create new user record
     function create(){
  
