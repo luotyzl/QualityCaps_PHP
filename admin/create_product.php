@@ -5,14 +5,15 @@ include_once "../config/core.php";
 // initialize classes
 include_once '../config/database.php';
 include_once '../objects/category.php';
+include_once '../objects/supplier.php';
 
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
 
-// initialize category object
+// initialize category and supplier object
 $category = new Category($db);
-
+$supplier = new Supplier($db);
 // set page title
 $page_title = "Create Product";
 
@@ -42,6 +43,7 @@ if($_POST){
 	$product->name = $_POST['name'];
 	$product->price = $_POST['price'];
 	$product->category_id = $_POST['category_id'];
+	$product->supplier_id = $_POST['supplier_id'];
 	
 	// create the product
 	if($product->create()){
@@ -106,7 +108,27 @@ if($_POST){
 			?>
 			</td>
 		</tr>
-		 
+		 <tr>
+			<td>Supplier</td>
+			<td>
+			<?php
+			// read the categories from the database
+			$stmt = $supplier->readAll_WithoutPaging();
+			
+			// put them in a select drop-down
+			echo "<select class='form-control' name='supplier_id'>";
+				echo "<option>Select supplier...</option>";
+				
+				// loop through the caregories
+				while ($row_supplier = $stmt->fetch(PDO::FETCH_ASSOC)){
+					extract($row_supplier);
+					echo "<option value='{$id}'>{$name}</option>";
+				}
+				
+			echo "</select>";
+			?>
+			</td>
+		</tr>
 		
 		<tr>
 			<td>Image(s):</td>

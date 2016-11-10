@@ -12,7 +12,8 @@ class Product{
 	public $price;
 	public $category_id;
 	public $category_name;
-
+	public $supplier_id;
+	public $supplier_name;
 	// constructor
 	public function __construct($db){
 		$this->conn = $db;
@@ -21,10 +22,12 @@ class Product{
 	// read products with field sorting
 	public function readAll_WithSorting($from_record_num, $records_per_page, $field, $order){
 
-		$query = "SELECT p.id, p.name, p.price, p.category_id, c.name as category_name,
+		$query = "SELECT p.id, p.name, p.price, p.category_id, c.name as category_name, p.supplier_id, s.name as supplier_name,
 					FROM products p
 						LEFT JOIN categories c
 							ON p.category_id=c.id
+							LEFT JOIN suppliers s 
+							ON p.supplier_id = s.id
 					ORDER BY {$field} {$order}
 					LIMIT :from_record_num, :records_per_page";
 
@@ -47,7 +50,7 @@ class Product{
 		$query = "INSERT INTO
 					" . $this->table_name . "
 				SET
-					name = ?, price = ?, category_id = ?";
+					name = ?, price = ?, category_id = ?,supplier_id = ?";
 
 		// prepare query statement
 		$stmt = $this->conn->prepare($query);
@@ -56,12 +59,13 @@ class Product{
 		$this->name=htmlspecialchars(strip_tags($this->name));
 		$this->price=htmlspecialchars(strip_tags($this->price));		
 		$this->category_id=htmlspecialchars(strip_tags($this->category_id));
+		$this->supplier_id=htmlspecialchars(strip_tags($this->supplier_id));
 
 		// bind values
 		$stmt->bindParam(1, $this->name);
 		$stmt->bindParam(2, $this->price);
 		$stmt->bindParam(3, $this->category_id);
-
+		$stmt->bindParam(4, $this->supplier_id);
 
 		// execute query
 		if($stmt->execute()){
@@ -76,14 +80,17 @@ class Product{
 
 		// select all products query
 		$query = "SELECT
-					c.name as category_name, p.id, p.name,  p.price, p.category_id
+					c.name as category_name, p.id, p.name,  p.price, p.category_id,p.supplier_id,s.name as supplier_name
 				FROM
 					" . $this->table_name . " p
 					LEFT JOIN
 						categories c
 					ON
 						p.category_id = c.id
-				
+					LEFT JOIN
+						suppliers s
+					ON
+						p.supplier_id = s.id
 				ORDER BY
 					p.name DESC
 				LIMIT
@@ -108,14 +115,17 @@ class Product{
 
 		// sql query to read all inactive products
 		$query = "SELECT
-					c.name as category_name, p.id, p.name, p.price, p.category_id
+					c.name as category_name,s.name as supplier_name, p.id, p.name, p.price, p.category_id,p.supplier_id
 				FROM
 					" . $this->table_name . " p
 					LEFT JOIN
 						categories c
 					ON
 						p.category_id = c.id
-				
+					LEFT JOIN
+						suppliers s
+					ON
+						p.supplier_id = s.id
 				ORDER BY
 					p.name ASC
 				LIMIT
@@ -140,13 +150,17 @@ class Product{
 
 		// query to read all products by category
 		$query = "SELECT
-					c.name as category_name, p.id, p.name, p.price, p.category_id
+					c.name as category_name,s.name as supplier_name, p.id, p.name, p.price, p.category_id,p.supplier_id
 				FROM
 					" . $this->table_name . " p
 					LEFT JOIN
 						categories c
 					ON
 						p.category_id = c.id
+					LEFT JOIN
+						suppliers s
+					ON
+						p.supplier_id = s.id
 				WHERE
 					 category_id = ?
 				ORDER BY
@@ -358,12 +372,15 @@ class Product{
 
 		// query to select single record
 		$query = "SELECT
-					c.name as category_name, p.name, p.price, p.category_id
+					c.name as category_name,s.name as supplier_name, p.name, p.price, p.category_id,p.supplier_id
 				FROM
 					" . $this->table_name . " p
 					LEFT JOIN
 						categories c
 							ON p.category_id = c.id
+					LEFT JOIN
+						suppliers s
+							ON p.supplier_id = s.id
 				WHERE
 					p.id = ?
 				LIMIT
@@ -389,6 +406,9 @@ class Product{
 		$this->price = $row['price'];
 		$this->category_id = $row['category_id'];
 		$this->category_name = $row['category_name'];
+		$this->supplier_id = $row['supplier_id'];
+		$this->supplier_name = $row['supplier_name'];
+
 	}
 
 	// update the product
@@ -400,7 +420,8 @@ class Product{
 				SET
 					name = :name,
 					price = :price,					
-					category_id  = :category_id,					
+					category_id  = :category_id,
+					supplier_id  = :supplier_id,
 				WHERE
 					id = :id";
 
@@ -411,12 +432,14 @@ class Product{
 		$this->name=htmlspecialchars(strip_tags($this->name));
 		$this->price=htmlspecialchars(strip_tags($this->price));
 		$this->category_id=htmlspecialchars(strip_tags($this->category_id));
+		$this->supplier_id=htmlspecialchars(strip_tags($this->supplier_id));
 		$this->id=htmlspecialchars(strip_tags($this->id));
 
 		// bind variable values
 		$stmt->bindParam(':name', $this->name);
 		$stmt->bindParam(':price', $this->price);
 		$stmt->bindParam(':category_id', $this->category_id);
+		$stmt->bindParam(':supplier_id', $this->supplier_id);
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query
