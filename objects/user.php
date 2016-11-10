@@ -289,7 +289,7 @@ class User{
 	function search($search_term, $from_record_num, $records_per_page){
 
 		// query to search user
-		$query = "SELECT id, firstname, lastname, email, contact_number, access_level, created
+		$query = "SELECT id, firstname, lastname, email, contact_number, access_level,status, created
 				FROM " . $this->table_name . " 
 				WHERE email LIKE ? 
 				ORDER BY email ASC 
@@ -329,7 +329,8 @@ class User{
 						email = :email,
 						contact_number = :contact_number,
 						address = :address,
-						access_level = :access_level
+						access_level = :access_level,
+						status = :user_status
 					WHERE
 						id = :id";
 						
@@ -343,7 +344,8 @@ class User{
 			$this->contact_number=htmlspecialchars(strip_tags($this->contact_number));
 			$this->address=htmlspecialchars(strip_tags($this->address));
 			$this->access_level=htmlspecialchars(strip_tags($this->access_level));
-			
+			$this->status=htmlspecialchars(strip_tags($this->status));
+
 			// bind the values from the form
 			$stmt->bindParam(':firstname', $this->firstname);
 			$stmt->bindParam(':lastname', $this->lastname);
@@ -351,7 +353,7 @@ class User{
 			$stmt->bindParam(':contact_number', $this->contact_number);
 			$stmt->bindParam(':address', $this->address);
 			$stmt->bindParam(':access_level', $this->access_level);
-			
+			$stmt->bindParam(':user_status', $this->status);
 		}
 		
 		// if password was posted, update the password
@@ -365,7 +367,8 @@ class User{
 						contact_number = :contact_number,
 						address = :address,
 						password = :password,
-						access_level = :access_level
+						access_level = :access_level,
+						status = :user_status
 					WHERE
 						id = :id";
 						
@@ -380,7 +383,8 @@ class User{
 			$this->address=htmlspecialchars(strip_tags($this->address));
 			$this->password=htmlspecialchars(strip_tags($this->password));
 			$this->access_level=htmlspecialchars(strip_tags($this->access_level));
-			
+			$this->status=htmlspecialchars(strip_tags($this->status));
+
 			// bind the values from the form
 			$stmt->bindParam(':firstname', $this->firstname);
 			$stmt->bindParam(':lastname', $this->lastname);
@@ -393,7 +397,7 @@ class User{
 			$stmt->bindParam(':password', $password_hash);
 			
 			$stmt->bindParam(':access_level', $this->access_level);
-				
+			$stmt->bindParam(':user_status', $this->status);	
 		}
 		
 		// unique ID of record to be edited
@@ -411,7 +415,7 @@ class User{
 	function readOne(){
 	 
 		// query to read single record
-		$query = "SELECT firstname, lastname, email, contact_number, address, access_level, password 
+		$query = "SELECT firstname, lastname, email, contact_number, address, access_level,status, password 
 				FROM " . $this->table_name . "
 				WHERE id = ? 
 				LIMIT 0,1";
@@ -439,13 +443,15 @@ class User{
 		$this->address = $row['address'];
 		$this->access_level = $row['access_level'];
 		$this->password = $row['password'];
+		$this->status = $row['status'];
+
 	}
 	
 	// read all user rows from the database
 	function readAll_NoPaging(){
 	 
 		// query to read all users
-		$query = "SELECT id, firstname, lastname, email, contact_number, access_level, created
+		$query = "SELECT id, firstname, lastname, email, contact_number, access_level,status, created
 				FROM " . $this->table_name . "
 				ORDER BY created DESC";
 	 
@@ -470,6 +476,7 @@ class User{
 					email,
 					contact_number,
 					access_level,
+					status,
 					created
 				FROM
 					" . $this->table_name . "

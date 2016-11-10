@@ -41,6 +41,7 @@ if($_POST){
 	$user->address=$_POST['address'];
 	$user->access_level=$_POST['access_level'];
 	$user->password=$_POST['password'];
+	$user->status = $_POST['user_status'];
 	$user->id=$user_id;
 
 	// update the user
@@ -122,7 +123,23 @@ $user->readOne();
 				</div>
 			</td>
         </tr>
-		
+		<tr>
+            <td>Status</td>
+            <td>
+				<div class="btn-group" data-toggle="buttons">
+				
+					<!-- highlight the correct status button -->
+					<label class="btn btn-default <?php echo $user->status==1 ? 'active' : ''; ?>">
+						<input type="radio" name="user_status" value=1 <?php echo $user->status==1 ? 'checked' : ''; ?>> Yes
+					</label>
+					
+					<label class="btn btn-default <?php echo $user->status==0 ? 'active' : ''; ?>">
+						<input type="radio" name="user_status" value=0 <?php echo $user->status==0 ? 'checked' : ''; ?>> No
+					</label>
+					
+				</div>
+			</td>
+        </tr>
 		<?php
 		}
 		?>

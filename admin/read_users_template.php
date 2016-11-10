@@ -18,6 +18,7 @@ if($num>0){
             echo "<th>Email</th>";
             echo "<th>Contact Number</th>";
             echo "<th>Access Level</th>";
+			echo "<th>IsAvailable</th>";
 			echo "<th>Actions</th>";
         echo "</tr>";
  
@@ -32,7 +33,13 @@ if($num>0){
                 echo "<td>{$email}</td>";
 				echo "<td>{$contact_number}</td>";
 				echo "<td>{$access_level}</td>";
-
+				echo "<td>";
+					if($status==0){
+						echo "No";
+					}else{
+						echo "Yes";
+					}
+				echo "</td>";
                 echo "<td>";
                     
 					// edit button
@@ -41,15 +48,7 @@ if($num>0){
 					echo "</a>";
 					
 					// delete button, user with id # 1 cannot be deleted because it is the first admin
-					if($id!=1){
-						echo "<a delete-id='{$id}' delete-file='delete_user.php' class='btn btn-danger delete-object margin-left-1em'>";
-							echo "<span class='glyphicon glyphicon-remove'></span> Delete";
-						echo "</a>";
-						
-						echo "<a href='order_history.php?id={$id}' class='btn btn-primary'>";
-							echo "Order History";
-						echo "</a>";
-					}
+
                 echo "</td>";
             echo "</tr>";
         }
