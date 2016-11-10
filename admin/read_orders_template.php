@@ -31,7 +31,7 @@ if($num>0){
 			echo "<tr>";
 				echo "<td>{$transaction_id}</td>";
 				echo "<td>{$created}</td>";
-				echo "<td>{$firstname} {$lastname}</td>";
+				echo "<td>{$username}</td>";
 				echo "<td>&#36;" . number_format($total_cost, 2, '.', ',') . "</td>";
 				echo "<td>";
 					if($status==0){

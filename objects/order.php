@@ -10,8 +10,7 @@ class Order{
 	public $id;
 	public $transaction_id;
 	public $user_id;
-	public $firstname;
-	public $lastname;
+	public $username;
 	public $total_cost;
 	public $status;
 	public $created;
@@ -97,8 +96,7 @@ class Order{
 					o.total_cost, 
 					o.status, 
 					o.created, 
-					u.firstname as firstname, 
-					u.lastname as lastname 
+					u.username as username
 				FROM
 					" . $this->table_name . " o 
 					LEFT JOIN users u 
@@ -126,8 +124,7 @@ class Order{
 		// assigned values to object properties
 		$this->transaction_id = $row['transaction_id'];
 		$this->user_id = $row['user_id'];
-		$this->firstname = $row['firstname'];
-		$this->lastname = $row['lastname'];
+		$this->username = $row['username'];
 		$this->total_cost = $row['total_cost'];
 		$this->status = $row['status'];
 		$this->created = $row['created'];
@@ -145,8 +142,7 @@ class Order{
 					o.total_cost, 
 					o.status, 
 					o.created, 
-					u.firstname as firstname, 
-					u.lastname as lastname  
+					u.username as username
 				FROM 
 					" . $this->table_name . " o 
 					LEFT JOIN users u
@@ -184,8 +180,7 @@ class Order{
 					o.total_cost, 
 					o.status, 
 					o.created, 
-					u.firstname as firstname, 
-					u.lastname as lastname  
+					u.username as username
 				FROM 
 					" . $this->table_name . " o 
 					LEFT JOIN users u
@@ -226,8 +221,7 @@ class Order{
 					o.total_cost, 
 					o.status, 
 					o.created, 
-					u.firstname as firstname, 
-					u.lastname as lastname 
+					u.username as username
 				FROM
 					" . $this->table_name . " o 
 					LEFT JOIN users u
@@ -268,8 +262,7 @@ class Order{
 					o.total_cost, 
 					o.status, 
 					o.created,
-					u.firstname as firstname, 
-					u.lastname as lastname 
+					u.username as username
 				FROM
 					" . $this->table_name . " o 
 					LEFT JOIN users u 

@@ -57,7 +57,7 @@ if($order->created){
 		</tr>
 		<tr>
 			<td>Customer Name</td>
-			<td><?php echo $order->firstname . " " . $order->lastname; ?></td>
+			<td><?php echo $order->username; ?></td>
 		</tr>
 		<tr>
 			<td>Total Cost</td>
