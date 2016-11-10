@@ -50,10 +50,10 @@ echo "<div class='col-md-12'>";
 		if($page_title!="Order Search Results"){
 			echo "<ul class='nav nav-tabs margin-bottom-1em'>";
 				echo $status==0 ? "<li role='presentation' class='active'>" : "<li role='presentation'>";
-					echo "<a href='{$home_url}orders.php'>Pending</a>";
+					echo "<a href='{$home_url}orders.php'>Waiting</a>";
 				echo "</li>";
 				echo $status==1 ? "<li role='presentation' class='active'>" : "<li role='presentation'>";
-					echo "<a href='{$home_url}orders.php?status=1'>Completed</a>";
+					echo "<a href='{$home_url}orders.php?status=1'>Shipped</a>";
 				echo "</li>";
 			echo "</ul>";
 		}
@@ -80,9 +80,9 @@ echo "<div class='col-md-12'>";
 					echo "<td>&#36;" . number_format($total_cost, 2, '.', ',') . "</td>";
 					echo "<td>";
 						if($status==0){
-							echo "Pending";
+							echo "Waiting";
 						}else{
-							echo "Completed";
+							echo "Shipped";
 						}
 					echo "</td>";
 					echo "<td>";

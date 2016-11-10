@@ -73,13 +73,8 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 						&nbsp;&nbsp;<?php echo $_SESSION['username']; ?> 
-						&nbsp;&nbsp;<span class="caret"></span>
+						
 					</a>
-					<ul class="dropdown-menu" role="menu">
-						<!-- update currently logged in admin user -->
-						<li><a href="<?php echo $home_url; ?>admin/update_user.php?id=1">Edit Profile</a></li>
-		
-					</ul>
 				</li>
 				<!-- log out user -->
 						<li><a href="<?php echo $home_url; ?>logout.php">Logout</a></li>

@@ -70,7 +70,7 @@ echo "<div class='col-md-12'>";
 		// save order information
 		$order->user_id=$_SESSION['user_id'];
 		$order->transaction_id=$transaction_id;
-		$order->total_cost=$total_price;
+		$order->total_cost=$total_price*1.15;
 		$order->created=date("Y-m-d H:i:s");
 
 		// create the order

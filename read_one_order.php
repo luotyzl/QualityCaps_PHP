@@ -62,7 +62,7 @@ echo "<div class='col-md-12'>";
 			<td><?php echo $order->created; ?></td>
 		</tr>
 		<tr>
-			<td>Total Cost</td>
+			<td>Total Cost (GST 15%)</td>
 			<td>&#36;<?php echo number_format($order->total_cost, 2, '.', ','); ?></td>
 		</tr>
 		<tr>
@@ -70,9 +70,9 @@ echo "<div class='col-md-12'>";
 			<td>
 			<?php
 				if($order->status==0){
-					echo "Pending";
+					echo "Waiting";
 				}else{
-					echo "Completed";
+					echo "Shipped";
 				}
 			?>
 			</td>
