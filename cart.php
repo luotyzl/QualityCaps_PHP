@@ -88,9 +88,9 @@ if($num>0){
     // our table heading
     echo "<tr>";
         echo "<th class='textAlignLeft'>Product Name</th>";
-        echo "<th>Price (USD)</th>";
+        echo "<th>Price</th>";
             echo "<th style='width:15em;'>Quantity</th>";
-            echo "<th>Sub Total</th>";
+			echo "<th>Subtotal</th>";
             echo "<th>Action</th>";
     echo "</tr>";
 
@@ -125,12 +125,30 @@ if($num>0){
 
 		$total += $subtotal;
     }
-
-    echo "<tr>";
+	$gst = $total * 0.15;
+	$granttotal = $total + $gst;
+	echo "<tr>";
 	echo "<td><b>Total</b></td>";
 	echo "<td></td>";
 	echo "<td></td>";
 	echo "<td>&#36;" . number_format($total, 2, '.', ',') . "</td>";
+	echo "<td>";
+	echo "</td>";
+    echo "</tr>";
+
+	echo "<tr>";
+	echo "<td><b>GST(15%)</b></td>";
+	echo "<td></td>";
+	echo "<td></td>";
+	echo "<td>&#36;" . number_format($gst, 2, '.', ',') . "</td>";
+	echo "<td></td>";
+    echo "</tr>";
+
+    echo "<tr>";
+	echo "<td><b>Grand Total</b></td>";
+	echo "<td></td>";
+	echo "<td></td>";
+	echo "<td>&#36;" . number_format($granttotal, 2, '.', ',') . "</td>";
 	echo "<td>";
             echo "<a href='{$home_url}checkout' class='btn btn-success'>";
             echo "<span class='glyphicon glyphicon-shopping-cart'></span> Checkout";

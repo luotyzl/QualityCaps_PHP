@@ -42,7 +42,7 @@ echo "<div class='col-md-12'>";
 			// our table heading
 			echo "<tr>";
 				echo "<th class='textAlignLeft'>Product Name</th>";
-				echo "<th>Price (USD)</th>";
+				echo "<th>Price</th>";
 				echo "<th style='width:15em;'>Quantity</th>";
 				echo "<th>Sub Total</th>";
 			echo "</tr>";
@@ -69,15 +69,23 @@ echo "<div class='col-md-12'>";
 
 				$total_price+=$subtotal;
 			}
+			$subcost = $total_price;
+			$total_price *= 1.15;
 
 			// display total cost
 			echo "<tr>";
-				echo "<td><b>Total Cost</b></td>";
+				echo "<td><b>Subtotal</b></td>";
+				echo "<td></td>";
+				echo "<td></td>";
+				echo "<td><b>&#36;" . number_format($subcost, 2, '.', ',') . "</b></td>";
+			echo "</tr>";
+
+			echo "<tr>";
+				echo "<td><b>Total Cost(GST 15%)</b></td>";
 				echo "<td></td>";
 				echo "<td></td>";
 				echo "<td><b>&#36;" . number_format($total_price, 2, '.', ',') . "</b></td>";
 			echo "</tr>";
-
 		echo "</table>";
 
 		if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']==true){
@@ -93,7 +101,7 @@ echo "<div class='col-md-12'>";
 			echo "<table class='table table-hover table-responsive table-bordered' style='margin:0 0 3em 0;'>";
 				echo "<tr>";
 					echo "<td style='width:50%;'>Name:</td>";
-					echo "<td>{$user->firstname} {$user->lastname}</td>";
+					echo "<td>{$user->username}</td>";
 				echo "</tr>";
 				echo "<tr>";
 					echo "<td>Address:</td>";
@@ -103,32 +111,15 @@ echo "<div class='col-md-12'>";
 					echo "<td>Contact Number:</td>";
 					echo "<td>{$user->contact_number}</td>";
 				echo "</tr>";
-				echo "<tr>";
-					echo "<td colspan='2' class='text-align-center'>";
 
-						// give user the ability to update billing information
-						echo "<a href='edit_profile.php' class='btn btn-default'>";
-							echo "Edit Billing Information";
-						echo "</a>";
-					echo "</td>";
-				echo "</tr>";
 			echo "</table>";
 
-			// payment information
-			echo "<h4>Payment Information</h4>";
-
-			echo "<table class='table table-hover table-responsive table-bordered'>";
-				echo "<tr>";
-					echo "<td style='width:50%;'>Payment Method:</td>";
-					echo "<td>Cash On Delivery (COD)</td>";
-				echo "</tr>";
-			echo "</table>";
 
 			echo "<div class='text-align-center' style='margin:1em 0;'>";
 
 				// button to place order
 				echo "<a href='place_order.php' class='btn btn-success'>";
-					echo "<span class='glyphicon glyphicon-shopping-cart'></span> Place Order";
+					echo "<span class='glyphicon glyphicon-shopping-cart'></span> Confirm";
 				echo "</a>";
 			echo "</div>";
 		}

@@ -29,11 +29,6 @@ $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
 // set the id as product id property
 $product->id = $id;
 
-// check if product is active
-if(!$product->isActive()){
-	// redirect
-	header("Location: {$home_url}products.php?action=product_inactive");
-}
 
 // to read single record product
 $row = $product->readOne();
@@ -116,21 +111,16 @@ echo "<div class='col-md-12'>";
 			$quantity=$_SESSION['cart'][$id]['quantity'];
 
 			echo "<tr>";
-				echo "<td>Quantity</td>";
 				echo "<td>";
 
 					echo "<form class='add-to-cart-form'>";
-						echo "<div class='input-group'>";
-								// disable the input box
-								echo "<input type='number' name='quantity' value='{$quantity}' class='form-control' placeholder='Type quantity here...' min='1' disabled>";
-
 								// disable the add to cart button
 								echo "<span class='input-group-btn'>";
 									echo "<button type='submit' class='btn btn-primary add-to-cart' disabled>";
 										echo "<span class='glyphicon glyphicon-shopping-cart'></span> Already In Cart";
 									echo "</button>";
 								echo "</span>";
-						echo "</div>";
+
 					echo "</form>";
 
 				echo "</td>";
@@ -147,17 +137,12 @@ echo "<div class='col-md-12'>";
 				echo "</td>";
 				echo "<td>";
 					echo "<form class='add-to-cart-form'>";
-						echo "<div class='input-group'>";
-								// enable input box
-								echo "<input type='number' name='quantity' value='1' class='form-control' placeholder='Type quantity here...' min='1'>";
-
 								// enable add to cart button
 								echo "<span class='input-group-btn'>";
 									echo "<button type='submit' class='btn btn-primary add-to-cart'>";
 										echo "<span class='glyphicon glyphicon-shopping-cart'></span> Add to cart";
 									echo "</button>";
 								echo "</span>";
-						echo "</div>";
 					echo "</form>";
 				echo "</td>";
 			echo "</tr>";
