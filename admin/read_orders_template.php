@@ -1,5 +1,14 @@
 <?php 
-
+	echo "<ul class='nav nav-tabs margin-bottom-1em'>";
+		echo $status==0 ? "<li role='presentation' class='active'>" : "<li role='presentation'>";
+			echo "<a href='{$home_url}admin/read_orders.php'>Waiting</a>";
+		echo "</li>";
+		echo $status==1 ? "<li role='presentation' class='active'>" : "<li role='presentation'>";
+			echo "<a href='{$home_url}admin/read_orders.php?status=1'>Shipped</a>";
+		echo "</li>";
+	echo "</ul>";
+?>
+<?php 
 // if number of retrieved records were greater than zero
 if($num>0){
 
@@ -26,9 +35,9 @@ if($num>0){
 				echo "<td>&#36;" . number_format($total_cost, 2, '.', ',') . "</td>";
 				echo "<td>";
 					if($status==0){
-						echo "Pending";
+						echo "Waiting";
 					}else{
-						echo "Completed";
+						echo "Shipped";
 					}
 				echo "</td>";
 				echo "<td>";

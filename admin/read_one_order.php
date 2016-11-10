@@ -69,12 +69,12 @@ if($order->created){
 				<div class="btn-group" data-toggle="buttons">
 					<label class="btn btn-default <?php echo $order->status==0 ? 'active' : ''; ?>">
 						<input type="radio" name="status" value="0" 
-							transaction-id="<?php echo $transaction_id; ?>" <?php echo $order->status==0 ? 'checked' : ''; ?>> Pending
+							transaction-id="<?php echo $transaction_id; ?>" <?php echo $order->status==0 ? 'checked' : ''; ?>> Waiting
 					</label>
 					
 					<label class="btn btn-default <?php echo $order->status==1 ? 'active' : ''; ?>">
 						<input type="radio" name="status" value="1" 
-							transaction-id="<?php echo $transaction_id; ?>" <?php echo $order->status==1 ? 'checked' : ''; ?>> Completed
+							transaction-id="<?php echo $transaction_id; ?>" <?php echo $order->status==1 ? 'checked' : ''; ?>> Shipped
 					</label>
 					
 				</div>

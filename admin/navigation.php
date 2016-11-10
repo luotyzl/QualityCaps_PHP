@@ -25,44 +25,9 @@
 			
 				<!-- highlight if $page_title has 'Products' word. -->
 				<li <?php echo strpos($page_title, "Product")!==false ? "class='active dropdown'" : "class='dropdown'"; ?>>
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-						Products <span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu" role="menu">
+					<a href="<?php echo $home_url; ?>admin/read_products.php">Products</a>
 					
-						<!-- highlight if page title is 'Active Products' -->
-						<li <?php echo $page_title=="Active Products" ? "class='active'" : ""; ?>>
-							<a href="<?php echo $home_url; ?>admin/read_products.php">Active Products</a>
-						</li>
-						
-						<!-- highlight if page title is 'Inactive Products' -->
-						<li <?php echo $page_title=="Inactive Products" ? "class='active'" : ""; ?>>
-							<a href="<?php echo $home_url; ?>admin/read_inactive_products.php">Inactive Products</a>
-						</li>
-						<?php
-						// read all categories
-						$stmt=$category->readAll_WithoutPaging();
-						$num = $stmt->rowCount();
-
-						// loop through retrieved categories
-						if($num>0){
-							while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-								
-								// higlight if current category name was set and is the same with the category on current loop
-								if(isset($category_name) && $category_name==$row['name']){
-									echo "<li class='active'><a href='{$home_url}admin/category.php?id={$row['id']}'>{$row['name']}</a></li>";
-								}
-								
-								// show without highlight
-								else{
-									echo "<li><a href='{$home_url}admin/category.php?id={$row['id']}'>{$row['name']}</a></li>";
-								}								
-							}
-						}
-						?>
-					</ul>
 				</li>
-				
 				<!-- highlight for order related pages -->
 				<li <?php echo $page_title=="Orders" 
 							|| $page_title=="Order History"

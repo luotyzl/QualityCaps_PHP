@@ -1,5 +1,4 @@
 <?php
-
 	// loop through list of retrieved products from the database
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
@@ -35,18 +34,7 @@
 
 					echo "<p>";
 						echo "&#36;" . number_format($row['price'], 2, '.', ',');
-						echo " / ";
-						echo "{$row['category_name']}";
-						echo " / ";
-						if($row['active_until']!="0000-00-00 00:00:00"){
-							$date1 = new DateTime($row['active_until']);
-							$date2 = new DateTime(date('Y-m-d'));
-							$interval = $date1->diff($date2);
-
-							echo $interval->days . " days left";
-						}else{
-							echo "Not set.";
-						}
+						
 					echo "</p>";
 
 					echo "<p>";
