@@ -131,8 +131,7 @@ if($access_denied){
 	<!-- actual HTML login form -->
 	<div class="account-wall">
 		<div id="my-tab-content" class="tab-content">
-			<div class="tab-pane active" id="login">
-				<img class="profile-img" src="images/login-icon.png">
+			<div class="tab-pane active" id="login">			
 				<form class="form-signin" action="login" method="post">
 					<input type="text" name="username" class="form-control" placeholder="Username" required autofocus />
 					<input type="password" name="password" class="form-control" placeholder="Password" required />
