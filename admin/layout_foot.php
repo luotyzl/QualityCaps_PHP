@@ -74,7 +74,7 @@ $(document).ready(function(){
 				console.log(data);
 				
 				// if deleting product image or pdf
-				if(delete_file=='delete_image.php' || delete_file=='delete_pdf.php'){
+				if(delete_file=='delete_image.php'){
 					current_element.parent().hide();
 				}
 				
@@ -84,7 +84,7 @@ $(document).ready(function(){
 				}
 				
 			}).fail(function() {
-				alert('Unable to delete.');
+				document.location.href = document.URL;
 			});
 		}
 			
