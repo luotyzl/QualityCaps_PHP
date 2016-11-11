@@ -4,7 +4,7 @@ Options -Multiviews
 # Mod Rewrite
 Options +FollowSymLinks
 RewriteEngine On
-RewriteBase /QualityCaps_PHP/
+RewriteBase /luoy15/QualityCaps_PHP/
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

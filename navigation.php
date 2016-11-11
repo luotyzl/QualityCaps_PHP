@@ -36,7 +36,7 @@
 							category name wasn't set, because it is 'all products' page.
 						-->
 						<li <?php echo strpos($page_title, 'Product')!==false && !isset($category_name) ? "class='active'" : ""; ?>>
-							<a href="<?php echo $home_url; ?>products">All Products</a>
+							<a href="<?php echo $home_url; ?>products.php">All Products</a>
 						</li>
 
 						<?php
@@ -62,7 +62,7 @@
 					</ul>
 				</li>
 				<li <?php echo $page_title=="contactUs" ? "class='active'" : ""; ?> >
-					<a href="<?php echo $home_url; ?>contactUs">
+					<a href="<?php echo $home_url; ?>contactUs.php">
 						contactUs
 					</a>
 				</li>
@@ -71,7 +71,7 @@
 			<ul class="nav navbar-nav pull-right">
 			<!-- link to the "Cart" page, highlight if current page is cart.php -->
 				<li <?php echo $page_title=="Cart" ? "class='active'" : ""; ?> >
-					<a href="<?php echo $home_url; ?>cart">
+					<a href="<?php echo $home_url; ?>cart.php">
 						<?php
 						// return count, session user_id was set in core.php
 						$cart_item->user_id=$_SESSION['user_id'];
@@ -117,13 +117,13 @@
 			?>
 			<!--<ul class="nav navbar-nav pull-right">-->
 				<li <?php echo $page_title=="Register" ? "class='active'" : ""; ?>>
-					<a href="<?php echo $home_url; ?>register">
+					<a href="<?php echo $home_url; ?>register.php">
 						<span class="glyphicon glyphicon-check"></span> Register
 					</a>
 				</li>
 
 				<li <?php echo $page_title=="Login" ? "class='active'" : ""; ?>>
-					<a href="<?php echo $home_url; ?>login">
+					<a href="<?php echo $home_url; ?>login.php">
 						<span class="glyphicon glyphicon-log-in"></span> Log In
 					</a>
 				</li>

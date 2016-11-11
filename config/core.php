@@ -9,7 +9,7 @@ session_start();
 date_default_timezone_set('Asia/Manila');
 
 // home page url
-$home_url="http://localhost/QualityCaps_PHP/";
+$home_url="http://dochyper.unitec.ac.nz/luoy15/QualityCaps_PHP/";
 
 // ===== PAGINATION =====
 // page given in URL parameter, default page is one

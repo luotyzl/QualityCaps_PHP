@@ -137,7 +137,7 @@ if($access_denied){
 					<input type="password" name="password" class="form-control" placeholder="Password" required />
 					<input type="submit" class="btn btn-lg btn-primary btn-block" value="Log In" />
 					<div class='text-align-center margin-top-1em'>
-						<a href='<?php echo $home_url; ?>register'>Register</a>
+						<a href='<?php echo $home_url; ?>register.php'>Register</a>
 					</div>
 				</form>
 			</div>

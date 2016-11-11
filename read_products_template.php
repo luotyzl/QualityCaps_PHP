@@ -6,7 +6,7 @@
 
 			echo "<div class='thumbnail'>";
 
-				echo "<a href='{$home_url}product/" . $utils->slugify($row['name']) . "/{$row['id']}/'>";
+				echo "<a href='{$home_url}product.php/" . $utils->slugify($row['name']) . "/{$row['id']}/'>";
 					// related image files to a product
 					$product_image->product_id=$row['id'];
 					$stmt_product_image = $product_image->readFirst();
