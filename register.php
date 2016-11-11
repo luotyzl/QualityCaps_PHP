@@ -62,7 +62,7 @@ echo "<div class='col-md-12'>";
 
 			// create the user
 			if($user->create()){
-				mail($user->email, "WAD", "Thank you for registration"); 
+				mail($user->email,"Enjoy your shopping","Thank you for registration","FROM: wad@unitec.com"); 
 				echo "<div class='alert alert-info'>";
 					echo "Successfully registered.";
 					echo "<br/>";

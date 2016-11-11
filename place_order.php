@@ -74,16 +74,23 @@ echo "<div class='col-md-12'>";
 		$order->created=date("Y-m-d H:i:s");
 
 		// create the order
-		$order->create();
+		if($order->create()){
+			echo "<div class='alert alert-success'>";
+				echo "<strong>Your order has been placed!</strong> Thank you very much!";
+			echo "</div>";
+		}
+		else{
+			echo "<div class='alert alert-success'>";
+				echo "<strong>Cannot create order";
+			echo "</div>";
+		}
 
 		// remove cart items
 		$cart_item->user_id=$_SESSION['user_id'];
 		$cart_item->deleteAllByUser();
 
 		// tell the user order has been placed
-		echo "<div class='alert alert-success'>";
-			echo "<strong>Your order has been placed!</strong> Thank you very much!";
-		echo "</div>";
+		
 	}
 
 	// tell the user no products found in his cart

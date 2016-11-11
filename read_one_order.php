@@ -38,7 +38,7 @@ echo "<div class='col-md-12'>";
 	$order->readOneByTransactionId();
 
 	// check if record exists
-	if($order->created){
+	{
 
 	// read order details
 	?>
@@ -56,10 +56,6 @@ echo "<div class='col-md-12'>";
 		<tr>
 			<td>Transaction ID</td>
 			<td><?php echo $transaction_id; ?></td>
-		</tr>
-		<tr>
-			<td>Transaction Date</td>
-			<td><?php echo $order->created; ?></td>
 		</tr>
 		<tr>
 			<td>Total Cost (GST 15%)</td>
@@ -125,12 +121,7 @@ echo "<div class='col-md-12'>";
 
 	}
 
-	// tell the user order does not exist
-	else{
-		echo "<div class='alert alert-danger'>";
-			echo "<strong>Order does not exist.</strong>";
-		echo "</div>";
-	}
+
 
 echo "</div>";
 

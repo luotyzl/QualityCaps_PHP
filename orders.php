@@ -64,7 +64,6 @@ echo "<div class='col-md-12'>";
 			// our table heading
 			echo "<tr>";
 				echo "<th class='textAlignLeft'>Transaction ID</th>";
-				echo "<th>Transaction Date</th>";
 				echo "<th>Total Cost</th>";
 				echo "<th>Status</th>";
 				echo "<th>Action</th>";
@@ -76,7 +75,6 @@ echo "<div class='col-md-12'>";
 				//creating new table row per record
 				echo "<tr>";
 					echo "<td>{$transaction_id}</td>";
-					echo "<td>{$created}</td>";
 					echo "<td>&#36;" . number_format($total_cost, 2, '.', ',') . "</td>";
 					echo "<td>";
 						if($status==0){
