@@ -150,7 +150,7 @@ if($num>0){
 	echo "<td></td>";
 	echo "<td>&#36;" . number_format($granttotal, 2, '.', ',') . "</td>";
 	echo "<td>";
-            echo "<a href='{$home_url}checkout' class='btn btn-success'>";
+            echo "<a href='{$home_url}checkout.php' class='btn btn-success'>";
             echo "<span class='glyphicon glyphicon-shopping-cart'></span> Checkout";
             echo "</a>";
 	echo "</td>";

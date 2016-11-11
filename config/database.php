@@ -4,9 +4,9 @@ class Database{
 	
 	// specify your own database credentials
 	private $host = "localhost";
-	private $db_name = "luoy15mysql2";
-	private $username = "luoy15";
-	private $password = "12091990";
+	private $db_name = "mysqlcartlevel3";
+	private $username = "root";
+	private $password = "";
 	public $conn;
 	
 	// get the database connection

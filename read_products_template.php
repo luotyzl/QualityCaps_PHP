@@ -6,7 +6,7 @@
 
 			echo "<div class='thumbnail'>";
 
-				echo "<a href='{$home_url}product.php/" . $utils->slugify($row['name']) . "/{$row['id']}/'>";
+				// echo "<a href='{$home_url}product/" . $utils->slugify($row['name']) . "/{$row['id']}/'>";
 					// related image files to a product
 					$product_image->product_id=$row['id'];
 					$stmt_product_image = $product_image->readFirst();
@@ -26,17 +26,18 @@
 
 				echo "<div class='caption'>";
 
-					echo "<div class='display-none product-id'>{$row['id']}</div>";
+					echo "<div class= product-id'>ID:{$row['id']}</div>";
 					echo "<div class='display-none product-name'>{$row['name']}</div>";
 
-					$short_name = substr($row['name'], 0, 25) . '...';
-					echo "<h3 title='{$row['name']}'>{$short_name}</h3>";
+					echo "<h3 title='{$row['name']}'>{$row['name']}</h3>";
 
 					echo "<p>";
-						echo "&#36;" . number_format($row['price'], 2, '.', ',');
-						
+						echo "&#36;" . number_format($row['price'], 2, '.', ',');						
 					echo "</p>";
-
+					echo "<p>Supplier: {$row['supplier_name']}";						
+					echo "</p>";
+					echo "<p>Category: {$row['category_name']}";						
+					echo "</p>";
 					echo "<p>";
 					// if product was already added in the cart
 					$cart_item->user_id=isset($_SESSION['user_id']) ? $_SESSION['user_id'] : "";

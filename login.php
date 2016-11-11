@@ -71,7 +71,7 @@ if($_POST){
 
 		// // else, redirect only to 'Customer' section
 		// else{
-			header("Location: {$home_url}products.php?action=login_success");
+			header("Location: {$home_url}products.php");
 		// }
 	}
 
@@ -132,7 +132,7 @@ if($access_denied){
 	<div class="account-wall">
 		<div id="my-tab-content" class="tab-content">
 			<div class="tab-pane active" id="login">			
-				<form class="form-signin" action="login" method="post">
+				<form class="form-signin"  method="post">
 					<input type="text" name="username" class="form-control" placeholder="Username" required autofocus />
 					<input type="password" name="password" class="form-control" placeholder="Password" required />
 					<input type="submit" class="btn btn-lg btn-primary btn-block" value="Log In" />
