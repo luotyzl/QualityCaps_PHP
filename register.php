@@ -50,6 +50,7 @@ echo "<div class='col-md-12'>";
 			// set values to object properties
 			$user->username=$_POST['username'];
 			$user->contact_number=$_POST['contact_number'];
+			$user->email=$_POST['email'];
 			$user->address=$_POST['address'];
 			$user->password=$_POST['password'];
 			$user->access_level='Customer';
@@ -61,7 +62,7 @@ echo "<div class='col-md-12'>";
 
 			// create the user
 			if($user->create()){
-
+				mail($user->email, "WAD", "Thank you for registration"); 
 				echo "<div class='alert alert-info'>";
 					echo "Successfully registered.";
 					echo "<br/>";
