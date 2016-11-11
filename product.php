@@ -7,6 +7,7 @@ include_once "config/database.php";
 include_once "libs/php/utils.php";
 include_once "objects/product.php";
 include_once "objects/category.php";
+include_once "objects/supplier.php";
 include_once "objects/product_image.php";
 include_once 'objects/cart_item.php';
 
@@ -20,6 +21,7 @@ $utils = new Utils();
 // initialize objects
 $product = new Product($db);
 $category = new Category($db);
+$supplier = new Supplier($db);
 $product_image = new ProductImage($db);
 $cart_item = new CartItem($db);
 
@@ -44,7 +46,11 @@ echo "<div class='col-md-12'>";
 ?>
 <!-- HTML form for viewing a product -->
 	<table class='table table-hover table-responsive table-bordered margin-1em-zero'>
-
+	<div class='right-button-margin' style='overflow:hidden;'>
+		<a href='../../../products.php' class='btn btn-primary pull-right'>
+			<span class='glyphicon glyphicon-list'></span>  Back to products
+		</a>
+	</div>
 		<tr>
 			<td colspan='2'>
 			<?php
@@ -97,7 +103,14 @@ echo "<div class='col-md-12'>";
 				?>
 			</td>
 		</tr>
-
+		<tr>
+			<td>Supplier</td>
+			<td>
+				<?php
+				echo $product->supplier_name;
+				?>
+			</td>
+		</tr>
 		<?php
 		// if product was already added in the cart
 		$cart_item->user_id=isset($_SESSION['user_id']) ? $_SESSION['user_id'] : "";
@@ -111,42 +124,10 @@ echo "<div class='col-md-12'>";
 			$quantity=$_SESSION['cart'][$id]['quantity'];
 
 			echo "<tr>";
-				echo "<td>";
 
-					echo "<form class='add-to-cart-form'>";
-								// disable the add to cart button
-								echo "<span class='input-group-btn'>";
-									echo "<button type='submit' class='btn btn-primary add-to-cart' disabled>";
-										echo "<span class='glyphicon glyphicon-shopping-cart'></span> Already In Cart";
-									echo "</button>";
-								echo "</span>";
-
-					echo "</form>";
-
-				echo "</td>";
 			echo "</tr>";
 		}
 
-		// if product was not added to the cart yet
-		else{
-			echo "<tr>";
-				echo "<td>";
-					echo "<div class='product-id' style='display:none;'>{$id}</div>";
-					echo "<div class='product-name' style='display:none;'>{$product->name}</div>";
-					echo "Action";
-				echo "</td>";
-				echo "<td>";
-					echo "<form class='add-to-cart-form'>";
-								// enable add to cart button
-								echo "<span class='input-group-btn'>";
-									echo "<button type='submit' class='btn btn-primary add-to-cart'>";
-										echo "<span class='glyphicon glyphicon-shopping-cart'></span> Add to cart";
-									echo "</button>";
-								echo "</span>";
-					echo "</form>";
-				echo "</td>";
-			echo "</tr>";
-		}
 		?>
 
 	</table>
