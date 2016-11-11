@@ -62,6 +62,7 @@ class Order{
 					transaction_id = ?, 
 					user_id = ?, 
 					total_cost = ?, 
+					status = ?,
 					created = ?";
 		
 		// prepare query statement
@@ -71,17 +72,26 @@ class Order{
 		$this->transaction_id=htmlspecialchars(strip_tags($this->transaction_id));
 		$this->user_id=htmlspecialchars(strip_tags($this->user_id));
 		$this->total_cost=htmlspecialchars(strip_tags($this->total_cost));
+		$this->status="0";
 		
 		// bind values to be inserted
         $stmt->bindParam(1, $this->transaction_id);
         $stmt->bindParam(2, $this->user_id);
         $stmt->bindParam(3, $this->total_cost);
-        $stmt->bindParam(4, $this->created);
+		$stmt->bindParam(4, $this->status);
+        $stmt->bindParam(5, $this->created);
+		
 		
 		// execute the query
         if($stmt->execute()){
             return true;
         }else{
+			$stmt->execute();
+			$errorInfor = $stmt->errorInfo();
+			$file = fopen('log.txt', 'a') or exit("Unable to open file!");
+			//Output a line of the file until the end is reached
+			fwrite($file, $errorInfor[2] . date('d/m/Y == H:i:s') ."\r\n" );
+			fclose($file);
             return false;
         }
     }

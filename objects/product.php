@@ -71,6 +71,12 @@ class Product{
 		if($stmt->execute()){
 			return true;
 		}else{
+			$stmt->execute();
+			$errorInfor = $stmt->errorInfo();
+			$file = fopen('log.txt', 'a') or exit("Unable to open file!");
+			//Output a line of the file until the end is reached
+			fwrite($file, $errorInfor[2] . date('d/m/Y == H:i:s') ."\r\n" );
+			fclose($file);
 			return false;
 		}
 	}
@@ -469,6 +475,12 @@ class Product{
 		if($result=$stmt->execute()){
 			return true;
 		}else{
+			$stmt->execute();
+			$errorInfor = $stmt->errorInfo();
+			$file = fopen('log.txt', 'a') or exit("Unable to open file!");
+			//Output a line of the file until the end is reached
+			fwrite($file, $errorInfor[2] . date('d/m/Y == H:i:s') ."\r\n" );
+			fclose($file);
 			return false;
 		}
 	}
