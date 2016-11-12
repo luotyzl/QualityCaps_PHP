@@ -6,7 +6,6 @@
 
 			echo "<div class='thumbnail'>";
 
-				// echo "<a href='{$home_url}product/" . $utils->slugify($row['name']) . "/{$row['id']}/'>";
 					// related image files to a product
 					$product_image->product_id=$row['id'];
 					$stmt_product_image = $product_image->readFirst();
@@ -16,7 +15,8 @@
 						$x=1;
 						while ($row_product_image = $stmt_product_image->fetch(PDO::FETCH_ASSOC)){
 							$product_image_name = $row_product_image['name'];
-							echo "<div class='photo-thumb-home' style='background: url(uploads/images/{$product_image_name}) 50% 20% no-repeat;'></div>";
+							echo "<div class='photo-thumb-home' style='background:white 50% 20% no-repeat;'><img src='uploads/images/{$product_image_name}' width=358px height=300px/>";							
+							echo "</div>";
 							$x++;
 						}
 					}else{
@@ -26,18 +26,18 @@
 
 				echo "<div class='caption'>";
 
-					echo "<div class= product-id'>ID:{$row['id']}</div>";
+					echo "<div class='display-none product-id'>{$row['id']}</div>";
 					echo "<div class='display-none product-name'>{$row['name']}</div>";
-
+				
 					echo "<h3 title='{$row['name']}'>{$row['name']}</h3>";
 
 					echo "<p>";
-						echo "&#36;" . number_format($row['price'], 2, '.', ',');						
-					echo "</p>";
-					echo "<p>Supplier: {$row['supplier_name']}";						
-					echo "</p>";
-					echo "<p>Category: {$row['category_name']}";						
-					echo "</p>";
+						echo "&#36;" . number_format($row['price'], 2, '.', ',');
+						echo "<br/>";
+						echo "Category:" .$row['category_name']; 
+						echo "<br/>";
+						echo "Supplier:" .$row['supplier_name'];
+					echo "</p>";						
 					echo "<p>";
 					// if product was already added in the cart
 					$cart_item->user_id=isset($_SESSION['user_id']) ? $_SESSION['user_id'] : "";

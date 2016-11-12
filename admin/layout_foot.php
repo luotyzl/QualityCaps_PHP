@@ -84,7 +84,7 @@ $(document).ready(function(){
 				}
 				
 			}).fail(function() {
-				document.location.href = document.URL;
+				alert('Unable to delete.');
 			});
 		}
 			
