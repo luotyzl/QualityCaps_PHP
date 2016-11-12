@@ -8,6 +8,7 @@ RewriteBase /QualityCaps_PHP/
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+ErrorDocument 404 /error.html
 
 RewriteRule ^product/([a-zA-Z0-9_-]+)/([0-9]+)\/?$ product.php?name=$1&id=$2
 
