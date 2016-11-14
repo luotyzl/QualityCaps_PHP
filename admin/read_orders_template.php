@@ -10,7 +10,7 @@
 ?>
 <?php 
 // if number of retrieved records were greater than zero
-if($num>0){
+if($num>=0){
 
 	echo "<table class='table table-hover table-responsive table-bordered'>";
 

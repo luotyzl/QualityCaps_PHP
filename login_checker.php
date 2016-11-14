@@ -20,7 +20,7 @@ if(isset($page_title) && ($page_title=="Edit Profile" || $page_title=="Orders" |
 else if(isset($page_title) && ($page_title=="Login" || $page_title=="Sign Up")){
 	// if user not yet logged in, redirect to login page
 	if(isset($_SESSION['access_level']) && $_SESSION['access_level']=="Customer"){
-		header("Location: {$home_url}products.php");
+		// header("Location: {$home_url}products.php");
 	}
 }
 

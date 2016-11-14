@@ -45,7 +45,7 @@ echo "<div class='col-md-12'>";
 	$num = $stmt->rowCount();
 
 	// if count more than zero
-	if($num>0){
+	if($num>=0){
 
 		if($page_title!="Order Search Results"){
 			echo "<ul class='nav nav-tabs margin-bottom-1em'>";

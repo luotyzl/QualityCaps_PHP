@@ -118,7 +118,7 @@ $user->readOne();
 			</td>
         </tr>
 		<tr>
-            <td>Status</td>
+            <td>IsAvailable</td>
             <td>
 				<div class="btn-group" data-toggle="buttons">
 				

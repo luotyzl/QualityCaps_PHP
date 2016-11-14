@@ -116,7 +116,7 @@ if($order->created){
 		
 		// order total cost
 		echo "<tr>";
-			echo "<td><b>Total Cost</b></td>";
+			echo "<td><b>Total Cost(GST 15%)</b></td>";
 			echo "<td></td>";
 			echo "<td></td>";
 			echo "<td>&#36;" . number_format($order->total_cost, 2, '.', ',') . "</td>";
